@@ -58,10 +58,10 @@ export function walkthroughIntro(args: IWalkthroughArgs) {
 
     setInitialCamera(state, new Vec3(184.744, 0.000, -636.820), new Vec3(296.000, 16.000, 13.500));
 
-    let c0 = commentary(wt, null, 0)`Welcome to the walkthrough of the GPT large language model! Here we'll explore the model _nano-gpt_, with a mere 85,000 parameters.
+    let c0 = commentary(wt, null, 0)`GPT LLM 동작을 살펴볼거예요. 앞으로 85,000개 파라미터를 가진 _nano-gpt_ 모델을 탐구할 겁니다. 
 
-Its goal is a simple one: take a sequence of six letters: ${embed(ExampleInputOutput)}
-and sort them in alphabetical order, i.e. to "ABBBCC".`;
+목표는 간단합니다. 주어진 6개의 순서를 가진 문자: ${embed(ExampleInputOutput)} 를 알파벳 순서로 정렬하는 것입니다. 즉, "ABBBCC"가 되도록 하는 것이죠.`;
+
 
     if (c0.t > 0) {
         for (let cube of layout.cubes) {
@@ -96,9 +96,9 @@ and sort them in alphabetical order, i.e. to "ABBBCC".`;
     let tokenStr = c_str('_token_', 0, DimStyle.Token);
     let tokenIdxStr = c_str('_token index_', 0, DimStyle.TokenIdx);
 
-    commentary(wt, t6)`We call each of these letters a ${tokenStr}, and the set of the model's different tokens make up its _vocabulary_:${embed(TokenVocab)}
+    commentary(wt, t6)`이 6개 글자 각각을 ${tokenStr} 이라고 부르고, 모델의 토큰이 모여서 _vocabulary_ 를 만듭니다.:${embed(TokenVocab)} 
 
-    From this table, each token is assigned a number, its ${tokenIdxStr}. And now we can enter this sequence of numbers into the model:${embed(ExampleTokenValues)}\n`;
+    이 테이블에서 각 토큰은 숫자(${tokenIdxStr})로 할당됩니다. 이제 이 숫자들을 모델에 입력합니다. :${embed(ExampleTokenValues)}\n`;
     breakAfter();
 
     let t7 = afterTime(null, 1.5, 0.5);
@@ -129,8 +129,8 @@ and sort them in alphabetical order, i.e. to "ABBBCC".`;
 
     breakAfter();
 
-    let c5 = commentary(wt)`In the 3d view, each green cell represents a number being processed, and each blue cell is a weight. ${embed(GreenBlueCells)}
-    Each number in the sequence first gets turned into a 48 element vector (a size chosen for this particular model). This is called an _embedding_.`;
+    let c5 = commentary(wt)`우측 화면에서 녹색 셀은 숫자가 처리되는 것을 표현하고 각 청색 셀은 가중치 입니다. ${embed(GreenBlueCells)}
+    각각의 숫자는 48개의 요소를 가진 벡터로 변환됩니다. (크기는 선택된 모델에 따라 다릅니다). 이것을 임베딩 _embedding_ 이라고 부릅니다. `;
     breakAfter(c5);
 
     {
@@ -166,7 +166,7 @@ and sort them in alphabetical order, i.e. to "ABBBCC".`;
     }
 
     breakAfter();
-    commentary(wt)`The embedding is then passed through the model, going through a series of layers, called transformers, before reaching the bottom.`;
+    commentary(wt)`이 임베딩은 모델 전체 사용되며, 마지막에 도달하기 전까지 트랜스포머라고 부르는 layer들을 거치게 됩니다.`;
     breakAfter();
 
     {
@@ -220,11 +220,10 @@ and sort them in alphabetical order, i.e. to "ABBBCC".`;
         }
     }
 
-    commentary(wt)`So what's the output? A prediction of the next token in the sequence. So at the 6th entry, we get probabilities that the next token is
-        going to be 'A', 'B', or 'C'.`
+    commentary(wt)`그럼 결과는 무엇이 될까요? 문자열의 다음 토큰의 예상입니다. 그래서 6번째 항목에서 다음 토큰이 'A' 또는 'B' 또는 'C' 가 될 거라는 예측을 보게 됩니다.`;
+     
 
-    commentary(wt)`In this case, the model is pretty sure it's going to be 'A'. Now, we can feed this prediction back into the top of the model, and repeat
-    the entire process.`;
+    commentary(wt)`이 경우에 모델은 거의 확실하게 'A' 일 것입니다. 이제 예측값을 맨 처음에 다시 입력하고 전체 프로세스를 반복합니다. `;
 
     breakAfter();
 }
